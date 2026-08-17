@@ -142,6 +142,7 @@ export function AddTransactionSheet({ open, onClose }: Props) {
             kind,
             walletType: selectedWallet.type,
             walletId: selectedWallet.id,
+            walletName: selectedWallet.name,
           })
         : // Nothing is shown until a wallet is picked — the wallet decides which
           // categories are legal, so the first open must not offer stale chips.
