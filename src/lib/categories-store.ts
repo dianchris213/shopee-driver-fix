@@ -282,10 +282,15 @@ export function visibleCategoriesFor(input: {
   walletType?: string | null;
   /** Id of the selected wallet, used to resolve per-wallet custom categories. */
   walletId?: string | null;
+  /** Display/stored name of the selected wallet (legacy Shopeepay detection). */
+  walletName?: string | null;
 }): Category[] {
   // Shopeepay (Driver) wallet: every category whose name contains "Driver"
   // is selectable on both tabs; Income keeps "Driver COD" listed first.
-  if (input.walletType === "Driver") {
+  const normalizedName = (input.walletName ?? "").replaceAll(/\s/g, "").toLowerCase();
+  const isDriverWallet =
+    input.walletType === "Driver" || ["shopeepay", "drivershopee"].includes(normalizedName);
+  if (isDriverWallet) {
     const driverCats = input.categories.filter(
       (c) => c.kind === input.kind && !c.walletId && isDriverCategory(c.name),
     );
