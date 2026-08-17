@@ -37,7 +37,7 @@ export type Database = {
           name: string
           paid?: boolean
           priority_order?: number
-          user_id?: string
+          user_id: string
         }
         Update: {
           amount?: number
@@ -68,7 +68,7 @@ export type Database = {
           id?: string
           name: string
           type?: string
-          user_id?: string
+          user_id: string
         }
         Update: {
           created_at?: string
@@ -111,7 +111,15 @@ export type Database = {
           id?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "category_audit_log_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -186,7 +194,7 @@ export type Database = {
           id?: string
           note?: string
           type?: string
-          user_id?: string
+          user_id: string
           wallet_id?: string | null
           wallet_name?: string
         }
@@ -242,7 +250,7 @@ export type Database = {
           name: string
           sub?: string
           type?: string
-          user_id?: string
+          user_id: string
         }
         Update: {
           balance?: number
